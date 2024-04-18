@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add List Item</title>
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+
+<!-- Input field for the user to enter item text -->
+<input type="text" id="userInput" placeholder="Enter item">
+
+<!-- Button that when clicked will add the item to the list -->
+<button id="addItem">Add Item</button>
+
+<!-- Unordered list where new items will be added -->
+<ul id="itemList"></ul>
+
+<script>
+$(document).ready(function() {
+    $('#addItem').click(function() {
+        // Get the value from the input field
+        var userInput = $('#userInput').val().trim();
+
+        // Check if the input is not empty
+        if(userInput) {
+            // Append the new item to the list
+            $('#itemList').append('<li>' + userInput + '</li>');
+
+            // Clear the input field after adding the item
+            $('#userInput').val('');
+        } else {
+            // Optional: Alert the user if the input field is empty
+            alert("Please enter some text!");
+        }
+    });
+});
+</script>
+
+</body>
+</html>

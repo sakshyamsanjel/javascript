@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <title>simple form</title>
+    </head>
+    <body>
+        <h2>simple form</h2>
+        <form action="#" method ="POST">
+            <label for ="name">Name:</label>
+            <input type="text" id="name" name="name"required><br>
+            <label for ="password">Password:</label>
+            <input type="password" id="password" name="password"required><br>
+            <input type ="submit" value="Submit">
+        </form>
+        <script>
+            function validateForm(){
+                var name = document.getElementById("name").value;
+                var password = document.getElementById("password").value;
+                
+                var nameRegex = /^[a-zA-Z0-9_]{3,20}$/;
+                var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])$/;
+
+                if (!name.match(nameRegex)){
+                    alert("please enter validate name");
+
+                }
+                if(!password.match(PasswordRegex)){
+                    alert("please enter validate password");
+                    return false;
+                }
+                return true;
+            }
+            </script>
+    </body>
+</html>

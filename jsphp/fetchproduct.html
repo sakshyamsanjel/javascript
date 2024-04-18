@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fetch Product Info</title>
+</head>
+<body>
+
+<button id="loadProducts">Load Products</button>
+<div id="productInfo"></div>
+
+<script>
+document.getElementById('loadProducts').addEventListener('click', function() {
+    fetch('getProductInfo.php')
+        .then(response => response.json())
+        .then(data => {
+            if(data.success) {
+                const products = data.data.map(product =>
+                    `ID: ${product.id}, Name: ${product.name}, Price: ${product.price}<br>`
+                ).join('');
+                document.getElementById('productInfo').innerHTML = products;
+            } else {
+                document.getElementById('productInfo').innerHTML = 'No products found.';
+            }
+        })
+        .catch(error => console.error('Error:', error));
+});
+</script>
+
+</body>
+</html>

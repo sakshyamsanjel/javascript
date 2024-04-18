@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <form id="myForm" novalidate>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <span class="error" id="errorEmail"></span>
+        <br><br>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <span class="error" id="errorPassword"></span>
+        <br><br>
+        
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" required>
+        <span class="error" id="errorPhone"></span>
+        <br><br>
+        
+        <button type="button" onclick="validateForm()">Submit</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            // Reset error messages
+            document.getElementById('errorEmail').textContent = '';
+            document.getElementById('errorPassword').textContent = '';
+            document.getElementById('errorPhone').textContent = '';
+            
+            let isValid = true;
+
+            // Email validation
+            const email = document.getElementById('email').value;
+            if (!/\S+@\S+\.\S+/.test(email)) {
+                document.getElementById('errorEmail').textContent = 'Please enter a valid email address.';
+                isValid = false;
+            }
+
+            // Password validation (minimum 8 characters)
+            const password = document.getElementById('password').value;
+            if (password.length < 8) {
+                document.getElementById('errorPassword').textContent = 'Password must be at least 8 characters long.';
+                isValid = false;
+            }
+
+            // Phone number validation (basic US format)
+            const phone = document.getElementById('phone').value;
+            if (!/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(phone)) {
+                document.getElementById('errorPhone').textContent = 'Please enter a valid US phone number.';
+                isValid = false;
+            }
+
+            // If all inputs are valid
+            if (isValid) {
+                alert('Form is valid! Submitting...');
+                // Here, you can actually submit the form, or do something else with the data
+                // document.getElementById('myForm').submit();
+            }
+        }
+    </script>
+</body>
+</html>

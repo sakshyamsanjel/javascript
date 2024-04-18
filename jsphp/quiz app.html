@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Quiz App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f2;
+        }
+
+        #quiz-container {
+            width: 90%;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .options li {
+            list-style: none;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-top: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .options li:hover, .options li.selected {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+
+<div id="quiz-container">
+    <h2 id="question"></h2>
+    <ul id="options" class="options">
+        <!-- Options will be injected here -->
+    </ul>
+    <button id="next-button">Next</button>
+    <div id="result"></div>
+</div>
+
+<script>
+const quizData = [
+    {
+        question: "What is the capital of France?",
+        a: "Paris",
+        b: "London",
+        c: "Berlin",
+        d: "Madrid",
+        correct: "a"
+    },
+    {
+        question: "What does HTML stand for?",
+        a: "Hypertext Markup Language",
+        b: "Hypertext Markdown Language",
+        c: "Hyperloop Machine Language",
+        d: "Helicopters Terminals Motorboats Lamborghinis",
+        correct: "a"
+    },
+    {
+        question: "What year was JavaScript launched?",
+        a: "1996",
+        b: "1995",
+        c: "1994",
+        d: "none of the above",
+        correct: "b"
+    },
+    {
+        question: "Which planet is known as the Red Planet?",
+        a: "Earth",
+        b: "Mars",
+        c: "Jupiter",
+        d: "Saturn",
+        correct: "b"
+    }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+const questionEl = document.getElementById('question');
+const optionsEl = document.getElementById('options');
+const nextButton = document.getElementById('next-button');
+const resultEl = document.getElementById('result');
+
+nextButton.addEventListener('click', nextQuestion);
+
+function loadQuestion() {
+    deselectOptions();
+    const currentQuestion = quizData[currentQuestionIndex];
+    questionEl.innerText = currentQuestion.question;
+    optionsEl.innerHTML = '';
+    Object.keys(currentQuestion).forEach(key => {
+        if (['a', 'b', 'c', 'd'].includes(key)) {
+            const option = document.createElement('li');
+            option.innerText = currentQuestion[key];
+            option.addEventListener('click', () => selectOption(key, option));
+            optionsEl.appendChild(option);
+        }
+    });
+}
+
+function selectOption(key, optionElement) {
+    deselectOptions();
+    quizData[currentQuestionIndex].selected = key;
+    optionElement.classList.add('selected');
+}
+
+function deselectOptions() {
+    [...optionsEl.children].forEach(option => option.classList.remove('selected'));
+}
+
+function nextQuestion() {
+    if (quizData[currentQuestionIndex].selected) {
+        if (quizData[currentQuestionIndex].selected === quizData[currentQuestionIndex].correct) {
+            score++;
+        }
+    }
+
+    currentQuestionIndex++;
+    if (currentQuestionIndex < quizData.length) {
+        loadQuestion();
+    } else {
+        quizContainer.innerHTML = `<h2>You answered correctly at ${score}/${quizData.length} questions.</h2><button onclick="location.reload()">Restart Quiz</button>`;
+    }
+}
+
+loadQuestion(); // Initialize the quiz
+</script>
+</body>
+</html>

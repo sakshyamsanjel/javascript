@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Current Date and Time</title>
+</head>
+<body>
+    <h2>Current Date and Time</h2>
+    
+    <!-- Display current date and time -->
+    <p id="dateTimeDisplay"></p>
+    
+    <script>
+        function updateDateTimeDisplay() {
+            const now = new Date();
+            
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0'); // January is 0!
+            const year = now.getFullYear();
+            
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            const formattedDateTime = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+            
+            document.getElementById('dateTimeDisplay').innerText = formattedDateTime;
+        }
+
+        // Update the display immediately
+        updateDateTimeDisplay();
+
+        // Optional: Update the display every second to keep the time current
+        setInterval(updateDateTimeDisplay, 1000);
+    </script>
+</body>
+</html>

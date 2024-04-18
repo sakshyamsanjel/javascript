@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Toggle Background Color</title>
+    <style>
+        #colorBox {
+            width: 200px;
+            height: 200px;
+            background-color: #ffffff; /* Default color */
+            transition: background-color 0.5s ease; /* Smooth transition */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="colorBox"></div>
+    <button id="toggleButton">Toggle Color</button>
+    
+    <script>
+        const box = document.getElementById('colorBox');
+        const button = document.getElementById('toggleButton');
+        
+        let isColorChanged = false; // Flag to track color state
+
+        button.onclick = function() {
+            if (isColorChanged) {
+                // Reset to default color
+                box.style.backgroundColor = '#ffffff'; // Or simply "" to revert to stylesheet
+            } else {
+                // Change to new color
+                box.style.backgroundColor = '#4CAF50'; // Example: A shade of green
+            }
+            // Toggle flag
+            isColorChanged = !isColorChanged;
+        };
+    </script>
+
+</body>
+</html>

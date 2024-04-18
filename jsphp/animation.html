@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>jQuery Animate Example</title>
+<style>
+  #animate-box {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: relative; /* Required for left property animation */
+  }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="animate-box"></div>
+
+<script>
+  $(document).ready(function() {
+    $("#animate-box").click(function() {
+      $(this).animate({
+        left: '+=50', // Move right by 50px
+        opacity: '0.5'
+      }, 1000, "swing", function() {
+        // Animation complete callback function
+        alert("Animation complete!");
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

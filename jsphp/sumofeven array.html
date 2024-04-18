@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sum of Even Numbers</title>
+</head>
+<body>
+    <h2>Sum of Even Numbers in Array</h2>
+    <button onclick="calculateSum()">Calculate Sum of Even Numbers</button>
+    <h3>Sum: <span id="sum">0</span></h3>
+    
+    <script>
+        function calculateSum() {
+            // Example array of numbers
+            const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            let sum = 0;
+            
+            // Iterate through the array
+            for (let i = 0; i < numbers.length; i++) {
+                // Check if the number is even
+                if (numbers[i] % 2 === 0) {
+                    sum += numbers[i]; // Add the even number to the sum
+                }
+            }
+            
+            // Display the result
+            document.getElementById('sum').innerText = sum;
+        }
+    </script>
+</body>
+</html>
